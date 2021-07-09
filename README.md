@@ -4,7 +4,7 @@ This example demonstrates how to use the printf function with a Universal Serial
 
 ## Requirements
 
-- [ModusToolbox® software](https://www.cypress.com/products/modustoolbox-software-environment) v2.3
+- [ModusToolbox&trade; software](https://www.cypress.com/products/modustoolbox-software-environment) v2.3
 - [SEGGER J-Link software](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack)
 - Programming Language: C
 - Associated Parts: All [XMC™ MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-industrial-microcontroller-based-on-arm-cortex-m/) parts
@@ -109,10 +109,22 @@ Various CLI tools include a `-h` option that prints help information to the term
    **Figure 1. "Hello World!" in Terminal**
 
    ![](images/terminal-printf-application.png)
+   
+   
 
 ## Debugging
 
 You can debug the example to step through the code. In the IDE, use the **\<Application Name> Debug (JLink)** configuration in the **Quick Panel**. For more details, see the "Program and Debug" section in the [Eclipse IDE for ModusToolbox User Guide](https://www.cypress.com/MTBEclipseIDEUserGuide).
+
+## Design and Implementation
+
+The Implementation is realized by using UART resource. UART is configured by “**uart 1.0**”-personality in **Device Configurator** where such uart features were selected like baudrate, data bits, frame length.
+
+​	**Figure 2. pin configuration**
+
+![](images/pin.png)
+
+ In the main function, **retarget_io_init()** is used to redirect **printf**-function to the external terminal like putty or tera term.
 
 ## Related Resources
 
@@ -142,10 +154,11 @@ For XMC MCU devices, see [32-bit XMC™ Industrial Microcontroller based on Arm�
 
 Document Title: *CE231956* - *XMC MCU: UART Printf*
 
-| Version | Description of Change |
-| ------- | --------------------- |
-| 0.5.0   | New code example      |
+| Version | Description of Change                         |
+| ------- | --------------------------------------------- |
+| 0.5.0   | New code example                              |
 | 1.0.0   | Updated to support ModusToolbox software v2.3 |
+| 1.0.1   | Updated README                                |
 ------
 
 All other trademarks or registered trademarks referenced herein are the property of their respective owners.
