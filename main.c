@@ -53,6 +53,24 @@
 #endif
 
 /*******************************************************************************
+* Redirect the standard output to UART by re-implementing _write(...)          *
+*******************************************************************************/
+#include "xmc_uart.h"
+
+int _write(int file, char *ptr, int len) {
+  for (int i = 0; i < len; i++) {
+    XMC_UART_CH_Transmit(CYBSP_DEBUG_UART_HW, ptr[i]);
+
+    // Wait for transmit buffer to be ready
+    while (
+        XMC_UART_CH_GetStatusFlag(CYBSP_DEBUG_UART_HW) &
+           XMC_UART_CH_STATUS_FLAG_TRANSFER_STATUS_BUSY
+        );
+  }
+  return len;
+}
+
+/*******************************************************************************
 * Function Name: main
 ********************************************************************************
 * Summary:
